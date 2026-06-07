@@ -42,7 +42,7 @@ export default function StatsDashboard() {
       <div 
         className="relative py-24 px-4 bg-[#FAF8F5]"
         style={{
-          backgroundImage: 'url("/beige-palm-bg.png")',
+          backgroundImage: `url("${import.meta.env.BASE_URL}beige-palm-bg.png")`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed',
