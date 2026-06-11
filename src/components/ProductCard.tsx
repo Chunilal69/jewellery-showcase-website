@@ -27,17 +27,23 @@ export default function ProductCard({ item, onInquireClick, onAddToBag, isInBag,
 
   // Prefilled WhatsApp link specific to this jewelry piece
   const generateWhatsAppLink = (item: JewelleryItem) => {
+    const absoluteImageUrl = item.image.startsWith('http') 
+      ? item.image 
+      : `${window.location.origin}${item.image.startsWith('/') ? item.image : '/' + item.image}`;
+
     const text = `Hello Shyam Jewellers, I am interested in inquiring about:
 - *Item:* ${item.name}
 - *SKU:* ${item.sku}
 - *Metal/Purity:* ${item.metal} (${item.purity})
 - *Weight/Size:* ${item.weight}
 - *Estimate Range:* ${item.priceEstimate || 'N/A'}
+- *Product Image:* ${absoluteImageUrl}
 
 Please let me know the availability and current custom pricing for today's gold rate. Thank you!`;
     
     return `${DEALER_INFO.whatsappDirectLink}?text=${encodeURIComponent(text)}`;
   };
+
 
   return (
     <div

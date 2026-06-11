@@ -66,6 +66,10 @@ export default function InquiryModal({ item, isOpen, onClose, onSubmitInquiry }:
   };
 
   const getDirectWhatsAppInquiryMessage = () => {
+    const absoluteImageUrl = item.image.startsWith('http') 
+      ? item.image 
+      : `${window.location.origin}${item.image.startsWith('/') ? item.image : '/' + item.image}`;
+
     let customText = `Hello Shyam Jewellers, I am interested in inquiring about a piece of jewelry. My details are as follows:
 
 - *Customer:* ${customerName}
@@ -73,10 +77,12 @@ export default function InquiryModal({ item, isOpen, onClose, onSubmitInquiry }:
 - *Preffered Choice:* ${preferredContact}
 - *Selected Piece:* ${item.name} (${item.sku})
 - *Weight Option:* ${isCustomWeight ? `Customized Weight to ${customWeightValue}` : `Standard Weight (${item.weight})`}
+- *Product Image:* ${absoluteImageUrl}
 - *Notes/Requests:* ${notes || 'None'}`;
 
     return `${DEALER_INFO.whatsappDirectLink}?text=${encodeURIComponent(customText)}`;
   };
+
 
   return (
     <div className="fixed inset-0 bg-[#1A1A1A]/80 backdrop-blur-xs flex items-center justify-center p-4 z-50 animate-fadeIn">

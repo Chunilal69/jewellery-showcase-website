@@ -51,8 +51,13 @@ export default function InquiryBag({
 
   const getBulkWhatsAppInquiryMessage = () => {
     const itemList = itemsInBag
-      .map((item, idx) => `${idx + 1}. *${item.name}* (${item.sku}) - ${item.metal}, ${item.weight}`)
-      .join('\n');
+      .map((item, idx) => {
+        const absoluteImageUrl = item.image.startsWith('http') 
+          ? item.image 
+          : `${window.location.origin}${item.image.startsWith('/') ? item.image : '/' + item.image}`;
+        return `${idx + 1}. *${item.name}* (${item.sku}) - ${item.metal}, ${item.weight}\n   _Image:_ ${absoluteImageUrl}`;
+      })
+      .join('\n\n');
 
     const customText = `Hello Shyam Jewellers, I would like to make a consolidated jewelry showcase inquiry:
 
@@ -68,6 +73,7 @@ Kindly verify availability and pricing. Thank you!`;
 
     return `${DEALER_INFO.whatsappDirectLink}?text=${encodeURIComponent(customText)}`;
   };
+
 
   const handleDone = () => {
     setBulkSubmitted(false);
