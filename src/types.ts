@@ -1,13 +1,13 @@
 export interface JewelleryItem {
   id: string;
   name: string;
-  category: 'Rings' | 'Necklaces' | 'Earrings' | 'Bracelets' | 'Diamonds' | 'Watches';
+  category: 'Rings' | 'Necklaces' | 'Earrings' | 'Chains' | 'Bracelets' | 'Mangalsutra' | 'Pendants' | 'Nath';
   sku: string;
   description: string;
   image: string;
-  metal: 'Gold' | 'Diamond' | 'Kundan' | 'Platinum' | 'Rose Gold';
-  purity: string; // e.g., "22K, 916", "VVS-VS, FG Color", "Pt 950"
-  weight: string; // e.g., "12.5 grams", "1.8 Carats"
+  metal: 'Gold' | 'Silver';
+  purity: string; // e.g., "22K, 916", "925 Sterling"
+  weight: string; // e.g., "12.5 grams"
   isFeatured?: boolean;
   isNewArrival?: boolean;
   isTrending?: boolean;

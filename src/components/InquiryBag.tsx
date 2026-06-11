@@ -157,7 +157,7 @@ Kindly verify availability and pricing. Thank you!`;
                   Your Inquiry Bag is Empty
                 </p>
                 <p className="text-xs text-stone-400">
-                  Browse our high-heritage gold, diamond, and kundan collections to add pieces layout.
+                  Browse our high-heritage gold and sterling silver collections to add pieces layout.
                 </p>
               </div>
             </div>

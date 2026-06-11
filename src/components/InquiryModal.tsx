@@ -177,7 +177,7 @@ export default function InquiryModal({ item, isOpen, onClose, onSubmitInquiry }:
                     onChange={(e) => setIsCustomWeight(e.target.checked)}
                     className="rounded-none text-stone-700 border-[#1A1A1A]/20 focus:ring-0"
                   />
-                  <span>I need a customized weight / diamond carat</span>
+                  <span>I need customized weight or size specifications</span>
                 </label>
                 {isCustomWeight && (
                   <div className="animate-fadeIn">

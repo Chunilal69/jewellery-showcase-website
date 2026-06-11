@@ -33,11 +33,11 @@ export default function Header({
   const [isFocused, setIsFocused] = useState(false);
 
   const MOST_SEARCHED_ITEMS = [
-    'Rajputana Heritage Kundan Choker',
-    'The Solitaire Grace',
-    'Mayur Mandir Temple Jhumkas',
-    'Solitaire Diamond Cascade Choker',
-    'Royal Ganga-Jamuni Ruby Kada'
+    'Rajputana Royal Gold Choker Set',
+    'Swarna Link Gold Chain',
+    'Traditional Gold Temple Kada',
+    'Imperial Pearl Chandbalis',
+    'Elysian Filigree Gold Kada'
   ];
 
   const handleSearchSubmit = (e: React.FormEvent) => {
@@ -76,7 +76,7 @@ export default function Header({
         <div className="flex items-center space-x-4">
           <span className="flex items-center">
             <Sparkles size={11} className="mr-1.5 text-[#D4AF37] fill-[#D4AF37]" />
-            100% BIS Hallmarked Pure Gold & Certified Diamonds
+            100% BIS Hallmarked Pure Gold & Sterling Silver
           </span>
           <span className="hidden lg:inline flex items-center text-[#F9F7F2]/60">
             <Clock size={11} className="mr-1.5" />
@@ -244,6 +244,8 @@ export default function Header({
         onCategorySelect={onCategorySelect}
         onMetalSelect={onMetalSelect}
         selectedCategory={selectedCategory}
+        onGoToAbout={onGoToAbout}
+        onGoToHome={onGoToHome}
       />
     </header>
   );

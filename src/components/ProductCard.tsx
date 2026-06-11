@@ -10,9 +10,10 @@ interface ProductCardProps {
   onInquireClick: (item: JewelleryItem) => void;
   onAddToBag: (item: JewelleryItem) => void;
   isInBag: boolean;
+  onImageClick: (imageSrc: string) => void;
 }
 
-export default function ProductCard({ item, onInquireClick, onAddToBag, isInBag }: ProductCardProps) {
+export default function ProductCard({ item, onInquireClick, onAddToBag, isInBag, onImageClick }: ProductCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const imageContainerRef = useRef<HTMLDivElement>(null);
 
@@ -45,7 +46,11 @@ Please let me know the availability and current custom pricing for today's gold 
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Relative Image Display Box */}
-      <div ref={imageContainerRef} className="relative aspect-[4/3] w-full bg-[#FAF8F5] overflow-hidden select-none border-b border-[#1A1A1A]/10">
+      <div 
+        ref={imageContainerRef} 
+        onClick={() => onImageClick && onImageClick(item.image)}
+        className="relative aspect-[4/3] w-full bg-[#FAF8F5] overflow-hidden select-none border-b border-[#1A1A1A]/10 cursor-zoom-in"
+      >
         {/* Badges */}
         <div className="absolute top-3 left-3 z-10 flex flex-col space-y-1">
           {item.isNewArrival && (
@@ -74,6 +79,7 @@ Please let me know the availability and current custom pricing for today's gold 
           <img
             src={item.image}
             alt={item.name}
+            loading="lazy"
             className={`w-full h-full object-cover transition-transform duration-700 ease-out ${
               isHovered ? 'scale-110' : 'scale-100'
             }`}

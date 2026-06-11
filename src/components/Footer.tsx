@@ -89,7 +89,7 @@ export default function Footer({ onCategorySelect, onGoToAbout, onGoToHome }: Fo
             </li>
             <li>
               <span className="hover:text-[#D4AF37] cursor-pointer block">
-                FAQ on Customized Diamond Orders
+                FAQ on Custom Gold & Silver Orders
               </span>
             </li>
             <li>
@@ -129,7 +129,7 @@ export default function Footer({ onCategorySelect, onGoToAbout, onGoToHome }: Fo
                 <p className="text-xs text-stone-400 font-bold uppercase">Immediate WhatsApp Chat</p>
                 <p className="font-mono text-[#4ade80] font-bold text-base hover:underline">
                   <a href={DEALER_INFO.whatsappDirectLink} target="_blank" rel="noreferrer">
-                    +91 8147349242
+                    +91 863 065 9061
                   </a>
                 </p>
               </div>

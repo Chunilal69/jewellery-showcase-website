@@ -8,12 +8,14 @@ import StatsDashboard from './components/StatsDashboard';
 import OverlayMenu from './components/OverlayMenu';
 import MagneticButton from './components/MagneticButton';
 import TextReveal from './components/TextReveal';
+import Hero from './components/Hero';
 import { CATALOG, DEALER_INFO, METAL_RATES } from './data';
 import { JewelleryItem, Inquiry } from './types';
 import { Sparkles, Calendar, Search, Star, Clock, MapPin, CheckCircle, RefreshCw, X } from 'lucide-react';
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 import Reveal from './components/Reveal';
+import { motion, AnimatePresence } from 'motion/react';
 
 export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -22,6 +24,18 @@ export default function App() {
   const [selectedItemForModal, setSelectedItemForModal] = useState<JewelleryItem | null>(null);
   const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
   const [isInquiryBagOpen, setIsInquiryBagOpen] = useState(false);
+  const [zoomedImageSrc, setZoomedImageSrc] = useState<string | null>(null);
+
+  // Close zoom modal on escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setZoomedImageSrc(null);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
   
   // State for inquiry bag persistence
   const [itemsInBag, setItemsInBag] = useState<JewelleryItem[]>([]);
@@ -229,6 +243,11 @@ export default function App() {
     return matchesSearch && matchesCategory && matchesMetal;
   });
 
+  const isHomeView = selectedCategory === 'All' && selectedMetal === 'All' && searchQuery === '';
+  const displayedCatalog = isHomeView
+    ? filteredCatalog.filter(item => item.isFeatured || item.isTrending).slice(0, 8)
+    : filteredCatalog;
+
   return (
     <div className="min-h-screen text-stone-800 flex flex-col font-sans relative selection:bg-amber-600/20 antialiased selection:text-amber-900">
       
@@ -245,15 +264,21 @@ export default function App() {
         {/* Structured Header */}
       <Header
         onSearchChange={setSearchQuery}
-        onCategorySelect={setSelectedCategory}
+        onCategorySelect={(cat) => {
+          setSelectedCategory(cat);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
         selectedCategory={selectedCategory}
-        onMetalSelect={setSelectedMetal}
+        onMetalSelect={(metal) => {
+          setSelectedMetal(metal);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
         selectedMetal={selectedMetal}
         bagCount={itemsInBag.length}
         onBagClick={() => setIsInquiryBagOpen(true)}
         onGoToAbout={() => {
           setActiveTab('legacy');
-          window.scrollTo({ top: 300, behavior: 'smooth' });
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
         onGoToHome={() => {
           setActiveTab('home');
@@ -268,68 +293,14 @@ export default function App() {
       <main className="flex-1 w-full flex flex-col">
         {activeTab === 'home' ? (
           <>
-            {/* Elegant Royal Bridal Hero Banner */}
-            <section className="relative overflow-hidden w-full select-none border-b border-[#1A1A1A]/5">
-              <div className="absolute inset-0 z-0 select-none pointer-events-none">
-                <img
-                  src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=1200&blur=8"
-                  alt="Aesthetic Background Blur"
-                  className="w-full h-full object-cover opacity-15"
-                  referrerPolicy="no-referrer"
-                />
-              </div>
-
-              <div className="relative w-full px-6 md:px-12 xl:px-24 py-16 md:py-24 text-center space-y-6 z-10">
-                <Reveal delay={0.2} direction="down">
-                  <div className="inline-flex items-center space-x-2 border border-[#1A1A1A]/10 bg-transparent px-4 py-1.5 rounded-none text-[9px] tracking-[4px] text-[#1A1A1A] font-extrabold uppercase shadow-none">
-                    <Star size={10} className="fill-[#D4AF37] text-[#D4AF37]" />
-                    <span>PRESTIGIOUS HEIRLOOM SHOWCASE</span>
-                    <Star size={10} className="fill-[#D4AF37] text-[#D4AF37]" />
-                  </div>
-                </Reveal>
-
-                <div className="space-y-4">
-                  <TextReveal 
-                    delay={0.4} 
-                    text="Legacy of Absolute Purity & Exquisite Craftsmanship"
-                    className="font-serif text-3xl md:text-5xl lg:text-6xl text-stone-900 font-extrabold leading-[1.15] tracking-tight max-w-4xl mx-auto"
-                  />
-                  <Reveal delay={0.6}>
-                    <p className="text-xs md:text-sm text-stone-600 font-normal tracking-wide max-w-2xl mx-auto leading-relaxed">
-                      Step into an exclusive world of certified 22 Karat gold ornaments, pristine solitaire diamonds, and majestic Kundan bridal sets. Handcoded with precision matching standard Hallmarking parameters.
-                    </p>
-                  </Reveal>
-                </div>
-
-                {/* Primary Banner Buttons linking to main categories */}
-                <Reveal delay={0.8}>
-                  <div className="flex flex-wrap items-center justify-center gap-3 pt-4 text-xs font-bold tracking-widest uppercase">
-                    <MagneticButton>
-                      <button
-                        onClick={() => {
-                          setSelectedCategory('Necklaces');
-                          setSelectedMetal('All');
-                        }}
-                        className="cursor-pointer py-3.5 px-6 bg-[#1A1A1A] hover:bg-black text-[#FAF7F2] rounded-none shadow-none transition-all"
-                      >
-                        EXPLORE ROYAL CHOKERS
-                      </button>
-                    </MagneticButton>
-                    <MagneticButton>
-                      <button
-                        onClick={() => {
-                          setSelectedCategory('Rings');
-                          setSelectedMetal('Diamond');
-                        }}
-                        className="cursor-pointer py-3.5 px-6 bg-white hover:bg-stone-50 text-[#1A1A1A] border border-[#1A1A1A] rounded-none transition-all"
-                      >
-                        SOLITAIRE REGISTRY
-                      </button>
-                    </MagneticButton>
-                  </div>
-                </Reveal>
-              </div>
-            </section>
+            <Hero
+              onInquireClick={handleOpenSingleInquiryModal}
+              onAddToBag={handleAddToBag}
+              itemsInBag={itemsInBag}
+              setSelectedCategory={setSelectedCategory}
+              setSelectedMetal={setSelectedMetal}
+              onImageClick={setZoomedImageSrc}
+            />
 
             {/* Catalog Grid Section with interactive filter summary */}
             <section className="w-full px-6 md:px-12 xl:px-24 pb-16 space-y-8 flex-1">
@@ -341,7 +312,10 @@ export default function App() {
                     Bespoke Showcase Catalog
                   </h2>
                   <p className="text-[10px] text-stone-400 font-mono">
-                    Showing {filteredCatalog.length} of {CATALOG.length} premium articles
+                    {isHomeView 
+                      ? `Showing Curated Highlights (${displayedCatalog.length} of ${CATALOG.length} premium articles)` 
+                      : `Showing ${filteredCatalog.length} of ${CATALOG.length} premium articles`
+                    }
                   </p>
                 </div>
 
@@ -365,16 +339,18 @@ export default function App() {
                       <button onClick={() => setSearchQuery('')} className="ml-1.5 text-stone-400 hover:text-stone-700">×</button>
                     </span>
                   )}
-                  {selectedCategory === 'All' && selectedMetal === 'All' && !searchQuery && (
-                    <span className="text-stone-400 italic text-[11px] font-normal font-sans">No filters active (All items loaded)</span>
+                  {isHomeView && (
+                    <span className="text-stone-400 italic text-[11px] font-normal font-sans">
+                      Showing curated collections. Select a category from Menu to view full collections.
+                    </span>
                   )}
                 </div>
               </div>
 
               {/* Infinite Products Grid representation */}
-              {filteredCatalog.length > 0 ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-16 pb-16">
-                  {filteredCatalog.map((item, index) => (
+              {displayedCatalog.length > 0 ? (
+                <div id="catalog-grid" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-16 pb-16">
+                  {displayedCatalog.map((item, index) => (
                     <div 
                       key={item.id}
                       className={`transition-all duration-700 ${
@@ -387,6 +363,7 @@ export default function App() {
                           onInquireClick={handleOpenSingleInquiryModal}
                           onAddToBag={handleAddToBag}
                           isInBag={itemsInBag.some((i) => i.id === item.id)}
+                          onImageClick={setZoomedImageSrc}
                         />
                       </Reveal>
                     </div>
@@ -567,11 +544,11 @@ export default function App() {
           setSelectedCategory(cat);
           setSelectedMetal('All');
           setActiveTab('home');
-          window.scrollTo({ top: 300, behavior: 'smooth' });
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
         onGoToAbout={() => {
           setActiveTab('legacy');
-          window.scrollTo({ top: 100, behavior: 'smooth' });
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
         onGoToHome={() => {
           setActiveTab('home');
@@ -628,6 +605,41 @@ export default function App() {
           <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.73-1.45L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.968C16.512 2.016 14.153 1.01 11.609 1.01c-5.41 0-9.813 4.358-9.817 9.771-.002 1.83.5 3.613 1.453 5.17l-1.004 3.666 3.806-.983zm13.152-7.514c-.267-.134-1.58-.78-1.822-.868-.243-.09-.419-.134-.596.134-.176.268-.68.868-.834 1.046-.153.178-.307.2-.574.065-.267-.134-1.127-.416-2.148-1.328-.794-.708-1.33-1.582-1.486-1.85-.156-.268-.017-.413.117-.546.12-.12.267-.312.4-.468.134-.156.178-.268.267-.446.09-.178.045-.335-.022-.469-.068-.134-.596-1.434-.817-1.968-.215-.518-.432-.447-.596-.456-.153-.008-.33-.008-.507-.008-.178 0-.469.067-.714.335-.245.268-.938.917-.938 2.233 0 1.316.957 2.585 1.09 2.763.134.178 1.884 2.876 4.564 4.032.638.275 1.135.439 1.524.563.64.203 1.222.174 1.682.106.513-.076 1.58-.646 1.802-1.268.221-.623.221-1.159.155-1.268-.067-.107-.244-.196-.511-.33z" />
         </svg>
       </a>
+
+      {/* Global Centered Image Zoom Modal */}
+      <AnimatePresence>
+        {zoomedImageSrc && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setZoomedImageSrc(null)}
+            className="fixed inset-0 z-[150] bg-black/90 backdrop-blur-xs flex items-center justify-center p-4 cursor-zoom-out"
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-4xl max-h-[85vh] bg-stone-900 border border-white/10 shadow-2xl overflow-hidden flex items-center justify-center"
+            >
+              <img
+                src={zoomedImageSrc}
+                alt="Zoomed product inspection"
+                className="max-w-full max-h-[85vh] object-contain select-none"
+              />
+              <button
+                onClick={() => setZoomedImageSrc(null)}
+                className="absolute top-4 right-4 bg-black/60 border border-white/10 hover:border-white/30 text-white p-2 rounded-full cursor-pointer hover:bg-black transition-colors"
+                aria-label="Close zoom inspection"
+              >
+                <X size={20} />
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

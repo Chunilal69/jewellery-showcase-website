@@ -20,19 +20,19 @@ export default function StatsDashboard() {
   const faqs = [
     {
       q: 'Do you provide authentic Hallmark certifications?',
-      a: 'Absolutely. Every single gold article sold at Shyam Jewellers is 100% BIS Hallmarked with HUID (Hallmark Unique Identification Number) laser engraved. Our diamonds are tested, validated and certified by international laboratories like GIA and IGI.'
+      a: 'Absolutely. Every single gold and silver article sold at Shyam Jewellers is 100% BIS Hallmarked with HUID (Hallmark Unique Identification Number) laser engraved.'
     },
     {
-      q: 'Can I exchange or upgrade my old gold jewelry at your store?',
-      a: 'Yes, we offer a 100% Buyback and Exchange Guarantee. Your old gold jewelry will be melted and tested for purity right in front of you using our state-of-the-art computerized Karatmeter analyzer to secure the highest market valuations.'
+      q: 'Can I exchange or upgrade my old gold and silver jewelry at your store?',
+      a: 'Yes, we offer a 100% Buyback and Exchange Guarantee. Your old ornaments will be tested for purity right in front of you using our state-of-the-art computerized testing analyzers to secure the highest market valuations.'
     },
     {
       q: 'What is the standard time required for customized wedding jewelry?',
-      a: 'Depending on the complexity, classical hand-made bridal Kundan sets take about 15-21 working days. Modern diamond rings or solitaire studs can be custom-made and ready for collection in-store within 7-10 working days.'
+      a: 'Depending on the complexity, classical hand-made gold Haar and silver ornaments take about 15-21 working days. Custom gold rings or silver articles can be crafted and ready for collection in-store within 7-10 working days.'
     },
     {
       q: 'Do you charge extra for making charges or customized designs?',
-      a: 'Our making charges are highly competitive, starting from just 8% to 15% depending on the intricacy of the craftsmanship. We maintain 100% pricing transparency, detailing every single gram and stone weight on your final invoice.'
+      a: 'Our making charges are highly competitive, starting from just 8% to 15% depending on the intricacy of the craftsmanship. We maintain 100% pricing transparency, detailing every single gram of gold and silver on your final invoice.'
     }
   ];
 
@@ -91,10 +91,10 @@ export default function StatsDashboard() {
                   <ShieldCheck className="text-stone-900" size={22} />
                 </div>
                 <h3 className="font-serif text-sm font-bold text-stone-900 uppercase tracking-widest">
-                  Certified Diamond Registry
+                  Authentic Hallmark Trust
                 </h3>
                 <p className="text-stone-600 text-xs leading-relaxed">
-                  We exclusively use diamonds that are verified by GIA & IGI laboratories, cataloged with individual grading report dossiers.
+                  We exclusively deal in hallmarked gold and sterling silver, guaranteeing standard purity.
                 </p>
               </div>
             </Reveal>
@@ -206,7 +206,7 @@ export default function StatsDashboard() {
                 {/* Weight in Grams slider or input */}
                 <div>
                   <label className="block text-stone-300 mb-1 text-[10px] font-bold uppercase tracking-wider">
-                    Weight of Gold (Grams)
+                    Weight of Metal (Grams)
                   </label>
                   <input
                     type="number"
@@ -257,7 +257,7 @@ export default function StatsDashboard() {
             {/* Price Calculations Output display */}
             <div className="bg-black/30 rounded-none p-4 border border-white/10 space-y-2 select-none text-[#FAF8F5]/80 text-xs leading-relaxed">
               <div className="flex justify-between">
-                <span>Gold Value ({calculatorGram}g):</span>
+                <span>Metal Value ({calculatorGram}g):</span>
                 <span className="font-mono text-white">₹{goldMetalCost.toLocaleString()}</span>
               </div>
               <div className="flex justify-between">
