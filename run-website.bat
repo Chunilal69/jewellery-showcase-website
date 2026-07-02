@@ -1,7 +1,7 @@
 @echo off
-title Shyam Jewellers Website Launcher
+title Swarn Ganga Jewellers Website Launcher
 echo ===================================================
-echo   Starting Shyam Jewellers Website
+echo   Starting Swarn Ganga Jewellers Website
 echo ===================================================
 echo.
 

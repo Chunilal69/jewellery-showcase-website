@@ -4145,13 +4145,13 @@ export const METAL_RATES: MetalRate[] = [
 ];
 
 export const DEALER_INFO = {
-  name: 'Shyam Jewellers',
+  name: 'Swarn Ganga Jewellers',
   headline: 'Legacy of Trust, Purity & Exquisite Artistry',
   tagline: 'Crafting royal moments in gold & silver',
-  address: 'Shastri Nagar, Roorkee',
-  whatsappNumber: '+918630659061',
-  whatsappDirectLink: 'https://wa.me/918630659061',
-  phone: '01332-272424',
-  timing: '10:30 AM - 8:30 PM (Closed on Tuesdays)',
+  address: 'Bhuchadi Fatak, Near Bright Kids Play School',
+  whatsappNumber: '+919258641425',
+  whatsappDirectLink: 'https://wa.me/919258641425',
+  phone: '9258641425',
+  timing: '10:30 AM - 8:30 PM (Closed on Wednesdays)',
   hallmarkInfo: '100% BIS Hallmarked Pure Gold & Sterling Silver Jewellery.'
 };

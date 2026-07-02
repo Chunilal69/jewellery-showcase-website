@@ -31,7 +31,7 @@ export default function ProductCard({ item, onInquireClick, onAddToBag, isInBag,
       ? item.image 
       : `${window.location.origin}${item.image.startsWith('/') ? item.image : '/' + item.image}`;
 
-    const text = `Hello Shyam Jewellers, I am interested in inquiring about:
+    const text = `Hello ${DEALER_INFO.name}, I am interested in inquiring about:
 - *Item:* ${item.name}
 - *SKU:* ${item.sku}
 - *Metal/Purity:* ${item.metal} (${item.purity})

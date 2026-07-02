@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, ChevronRight, Sparkles } from 'lucide-react';
+import { DEALER_INFO } from '../data';
 
 interface OverlayMenuProps {
   isOpen: boolean;
@@ -144,7 +145,7 @@ export default function OverlayMenu({
               }}
               className="text-left font-serif text-lg font-bold tracking-wider hover:text-[#D4AF37] transition-colors uppercase"
             >
-              SHYAM JEWELLERS
+              {DEALER_INFO.name.toUpperCase()}
             </button>
             
             <button 
@@ -226,7 +227,7 @@ export default function OverlayMenu({
                 exit="exit"
               >
                 <h3 className="text-sm font-bold tracking-widest uppercase text-stone-500 mb-8">
-                  House of Shyam
+                  House of Swarn Ganga
                 </h3>
                 <ul className="space-y-4">
                   {houseLinks.map((item, idx) => (
@@ -292,10 +293,10 @@ export default function OverlayMenu({
               transition={{ delay: 0.6, duration: 0.5 }}
             >
               <div>
-                © {new Date().getFullYear()} Shyam Jewellers. Shastri Nagar, Roorkee.
+                © {new Date().getFullYear()} {DEALER_INFO.name}. Bhuchadi Fatak.
               </div>
               <div className="mt-4 md:mt-0 font-bold">
-                T. 01332-272424
+                Mob. +91 {DEALER_INFO.phone}
               </div>
             </motion.div>
 

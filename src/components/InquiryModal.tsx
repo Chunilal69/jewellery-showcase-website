@@ -70,7 +70,7 @@ export default function InquiryModal({ item, isOpen, onClose, onSubmitInquiry }:
       ? item.image 
       : `${window.location.origin}${item.image.startsWith('/') ? item.image : '/' + item.image}`;
 
-    let customText = `Hello Shyam Jewellers, I am interested in inquiring about a piece of jewelry. My details are as follows:
+    let customText = `Hello ${DEALER_INFO.name}, I am interested in inquiring about a piece of jewelry. My details are as follows:
 
 - *Customer:* ${customerName}
 - *Contact:* ${customerPhone}
@@ -265,7 +265,7 @@ export default function InquiryModal({ item, isOpen, onClose, onSubmitInquiry }:
                   Formal Inquiry Submitted Successfully
                 </h4>
                 <p className="text-xs text-stone-500 leading-relaxed max-w-sm mt-1">
-                  Thank you! The showroom assistant at Shastri Nagar has been notified.
+                  Thank you! The showroom assistant has been notified.
                 </p>
               </div>
 

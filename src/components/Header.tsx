@@ -3,6 +3,7 @@ import { Search, ShoppingBag, Phone, MapPin, Sparkles, Menu, X, Heart, Clock, Ch
 import { JewelleryItem } from '../types';
 import { DEALER_INFO } from '../data';
 import OverlayMenu from './OverlayMenu';
+import Logo from './Logo';
 
 interface HeaderProps {
   onSearchChange: (searchQuery: string) => void;
@@ -95,7 +96,7 @@ export default function Header({
           </a>
           <span className="flex items-center text-[#F9F7F2]/60">
             <MapPin size={11} className="mr-1.5" />
-            Shastri Nagar Experience Lounge
+            Swarn Ganga Experience Lounge
           </span>
         </div>
       </div>
@@ -120,8 +121,16 @@ export default function Header({
               isHovered || isFocused || searchValue !== '' ? 'w-44 md:w-64 lg:w-72' : 'w-9 md:w-10'
             }`}
             style={{ transition: 'all 600ms cubic-bezier(0.76, 0, 0.24, 1)' }}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
+            onMouseEnter={() => {
+              if (window.matchMedia('(hover: hover)').matches) {
+                setIsHovered(true);
+              }
+            }}
+            onMouseLeave={() => {
+              if (window.matchMedia('(hover: hover)').matches) {
+                setIsHovered(false);
+              }
+            }}
           >
             <form onSubmit={handleSearchSubmit} className="relative w-full h-9 md:h-10 flex items-center">
               <input
@@ -155,7 +164,15 @@ export default function Header({
               )}
 
               <button
-                type="submit"
+                type={isHovered || isFocused || searchValue !== '' ? "submit" : "button"}
+                onClick={(e) => {
+                  if (!(isHovered || isFocused || searchValue !== '')) {
+                    e.preventDefault();
+                    setIsFocused(true);
+                    const input = e.currentTarget.form?.querySelector('input');
+                    input?.focus();
+                  }
+                }}
                 className={`absolute flex items-center justify-center cursor-pointer ${
                   isHovered || isFocused || searchValue !== ''
                     ? 'right-2.5 md:right-3 w-5 h-5 md:w-6 md:h-6 text-[#1A1A1A] hover:text-[#D4AF37]'
@@ -205,12 +222,17 @@ export default function Header({
 
         {/* Center: Dynamic Brand Logo */}
         <div className="cursor-pointer select-none text-center flex-1 flex flex-col items-center justify-center" onClick={onGoToHome}>
-          <h1 className="font-serif text-3xl md:text-4xl font-extrabold uppercase tracking-tight text-[#1A1A1A] leading-none">
-            Shyam<br className="md:hidden"/> Jewellers
-          </h1>
-          <p className="text-[11px] uppercase tracking-[0.3em] mt-1.5 font-sans opacity-60 hidden md:block">
-            Shastri Nagar, Roorkee
-          </p>
+          <div className="flex flex-col md:flex-row items-center md:space-x-3">
+            <Logo size={46} className="mb-1.5 md:mb-0" />
+            <div className="flex flex-col items-center md:items-start">
+              <h1 className="font-serif text-xl md:text-2xl lg:text-3xl font-black uppercase tracking-tight text-[#1A1A1A] leading-none text-center md:text-left">
+                Swarn Ganga<br className="md:hidden"/> Jewellers
+              </h1>
+              <p className="text-[9px] uppercase tracking-[0.2em] mt-1 font-sans opacity-60 hidden md:block">
+                Near Bright Kids Play School
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Right Side: Interaction Buttons */}

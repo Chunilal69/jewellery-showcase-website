@@ -20,7 +20,7 @@ export default function StatsDashboard() {
   const faqs = [
     {
       q: 'Do you provide authentic Hallmark certifications?',
-      a: 'Absolutely. Every single gold and silver article sold at Shyam Jewellers is 100% BIS Hallmarked with HUID (Hallmark Unique Identification Number) laser engraved.'
+      a: 'Absolutely. Every single gold and silver article sold at Swarn Ganga Jewellers is 100% BIS Hallmarked with HUID (Hallmark Unique Identification Number) laser engraved.'
     },
     {
       q: 'Can I exchange or upgrade my old gold and silver jewelry at your store?',
@@ -63,7 +63,7 @@ export default function StatsDashboard() {
               />
               <div className="w-16 h-0.5 bg-[#D4AF37] mx-auto select-none" />
               <p className="text-xs text-stone-600 max-w-xl mx-auto leading-relaxed">
-                Shyam Jewellers has been a trusted symbol of exceptional artistry, pristine purity, and transparent dealing in Uttarakhand.
+                Swarn Ganga Jewellers has been a trusted symbol of exceptional artistry, pristine purity, and transparent dealing in Uttarakhand.
               </p>
             </div>
           </Reveal>

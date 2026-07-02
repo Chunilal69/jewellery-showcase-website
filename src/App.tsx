@@ -100,7 +100,7 @@ export default function App() {
 
   // Load bag from localStorage on startup
   useEffect(() => {
-    const savedBag = localStorage.getItem('roorkee_jewellers_bag');
+    const savedBag = localStorage.getItem('swarn_ganga_bag');
     if (savedBag) {
       try {
         setItemsInBag(JSON.parse(savedBag));
@@ -109,7 +109,7 @@ export default function App() {
       }
     }
     
-    const savedInquiries = localStorage.getItem('roorkee_jewellers_inquiries');
+    const savedInquiries = localStorage.getItem('swarn_ganga_inquiries');
     if (savedInquiries) {
       try {
         setLoggedInquiries(JSON.parse(savedInquiries));
@@ -142,19 +142,19 @@ export default function App() {
     }
 
     setItemsInBag(updatedBag);
-    localStorage.setItem('roorkee_jewellers_bag', JSON.stringify(updatedBag));
+    localStorage.setItem('swarn_ganga_bag', JSON.stringify(updatedBag));
   };
 
   const handleRemoveFromBag = (id: string) => {
     const updatedBag = itemsInBag.filter((item) => item.id !== id);
     setItemsInBag(updatedBag);
-    localStorage.setItem('roorkee_jewellers_bag', JSON.stringify(updatedBag));
+    localStorage.setItem('swarn_ganga_bag', JSON.stringify(updatedBag));
     triggerToast('Item removed from inquiry selection.');
   };
 
   const handleClearBag = () => {
     setItemsInBag([]);
-    localStorage.removeItem('roorkee_jewellers_bag');
+    localStorage.removeItem('swarn_ganga_bag');
   };
 
   const handleOpenSingleInquiryModal = (item: JewelleryItem) => {
@@ -196,7 +196,7 @@ export default function App() {
 
     const nextInquiries = [newInquiry, ...loggedInquiries];
     setLoggedInquiries(nextInquiries);
-    localStorage.setItem('roorkee_jewellers_inquiries', JSON.stringify(nextInquiries));
+    localStorage.setItem('swarn_ganga_inquiries', JSON.stringify(nextInquiries));
     triggerToast(`Bespoke inquiry for "${selectedItemForModal.name}" logged successfully!`);
   };
 
@@ -225,7 +225,7 @@ export default function App() {
 
     const nextInquiries = [newInquiry, ...loggedInquiries];
     setLoggedInquiries(nextInquiries);
-    localStorage.setItem('roorkee_jewellers_inquiries', JSON.stringify(nextInquiries));
+    localStorage.setItem('swarn_ganga_inquiries', JSON.stringify(nextInquiries));
     triggerToast(`Consolidated bulk inquiry logged for ${itemsInBag.length} pieces!`);
   };
 
@@ -403,7 +403,7 @@ export default function App() {
           /* Our Elegant Legacy Chronicle Screen view */
           <section className="max-w-5xl mx-auto px-6 md:px-12 py-16 space-y-12 animate-fadeIn flex-1">
             <div className="text-center space-y-3">
-              <span className="text-[#D4AF37] text-[10px] font-black tracking-widest uppercase block">SHYAM JEWELLERS</span>
+              <span className="text-[#D4AF37] text-[10px] font-black tracking-widest uppercase block">SWARN GANGA JEWELLERS</span>
               <h2 className="font-serif text-3xl md:text-4xl text-[#1A1A1A] font-extrabold tracking-wide uppercase">
                 Chronicle of Timeless Brilliance
               </h2>
@@ -423,7 +423,7 @@ export default function App() {
                 <span className="font-mono text-[#D4AF37] font-extrabold text-[12px] tracking-wider block">1984 — FOUNDATION</span>
                 <h4 className="font-serif text-sm font-bold text-[#1A1A1A] tracking-wider uppercase">Humble Beginnings</h4>
                 <p className="leading-relaxed text-stone-500 text-xs font-sans">
-                  Founded by Late Shri Kundan Lal Sharma, carving out customized bridal jewelry with flawless manual goldsmithing under pure trust guidelines.
+                  Founded by Late Shri Kundan Lal Sharma, carving out customized bridal jewelry with flawless manual goldsmithing under Swarn Ganga trust guidelines.
                 </p>
               </div>
 
@@ -445,9 +445,9 @@ export default function App() {
                   ✓
                 </span>
                 <span className="font-mono text-[#D4AF37] font-extrabold text-[12px] tracking-wider block">2015 — THE MODERN LOUNGE REVAMP</span>
-                <h4 className="font-serif text-sm font-bold text-[#1A1A1A] tracking-wider uppercase">Civil Lines Lounge Launch</h4>
+                <h4 className="font-serif text-sm font-bold text-[#1A1A1A] tracking-wider uppercase">Boutique Showroom Expansion</h4>
                 <p className="leading-relaxed text-stone-500 text-xs font-sans">
-                  Expanded into a majestic multi-story luxury boutique outlet in Civil Lines near Malviya Chowk, launching dedicated solitaire selection chambers, and certification logs registry.
+                  Expanded into a majestic luxury boutique showroom near Bhuchadi Fatak, launching dedicated selection chambers, and certification logs registry.
                 </p>
               </div>
 
@@ -492,7 +492,7 @@ export default function App() {
                 <button
                   onClick={() => {
                     setLoggedInquiries([]);
-                    localStorage.removeItem('roorkee_jewellers_inquiries');
+                    localStorage.removeItem('swarn_ganga_inquiries');
                     triggerToast('Inquiry logs cleared.');
                   }}
                   className="text-[10px] text-red-600 font-bold hover:underline"

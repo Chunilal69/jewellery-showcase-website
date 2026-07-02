@@ -59,7 +59,7 @@ export default function InquiryBag({
       })
       .join('\n\n');
 
-    const customText = `Hello Shyam Jewellers, I would like to make a consolidated jewelry showcase inquiry:
+    const customText = `Hello ${DEALER_INFO.name}, I would like to make a consolidated jewelry showcase inquiry:
 
 *Selected Items:*
 ${itemList}
